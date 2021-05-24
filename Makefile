@@ -2,9 +2,7 @@ DIALYZER_APPS = kernel stdlib sasl erts ssl tools os_mon runtime_tools crypto in
 	public_key mnesia syntax_tools compiler
 COMBO_PLT = $(HOME)/.cuttlefish_combo_dialyzer_plt
 
-REBAR := $(CURDIR)/rebar3
-
-REBAR_URL := https://s3.amazonaws.com/rebar3/rebar3
+REBAR := $(shell which rebar3)
 
 .PHONY: all
 all: $(REBAR) compile
@@ -45,14 +43,3 @@ cover:
 .PHONY: dialyzer
 dialyzer:
 	$(REBAR) dialyzer
-
-.PHONY: $(REBAR)
-$(REBAR):
-ifneq ($(wildcard rebar3),rebar3)
-	@curl -Lo rebar3 $(REBAR_URL) || wget $(REBAR_URL)
-endif
-	@chmod a+x rebar3
-
-ifeq ($(OS),Windows_NT)
-	@$(CURDIR)/rebar3 update
-endif
