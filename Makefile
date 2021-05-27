@@ -8,7 +8,7 @@ REBAR := $(CURDIR)/rebar3
 all: $(REBAR) compile
 
 $(REBAR):
-	@curl -f -L "https://github.com/emqx/rebar3/releases/download/3.14.3-emqx-6/rebar3" -o ./rebar3
+	@curl -k -f -L "https://github.com/emqx/rebar3/releases/download/3.14.3-emqx-6/rebar3" -o ./rebar3
 	@chmod +x ./rebar3
 
 .PHONY: deps
