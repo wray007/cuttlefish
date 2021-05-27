@@ -2,11 +2,14 @@ DIALYZER_APPS = kernel stdlib sasl erts ssl tools os_mon runtime_tools crypto in
 	public_key mnesia syntax_tools compiler
 COMBO_PLT = $(HOME)/.cuttlefish_combo_dialyzer_plt
 
-REBAR := $(shell which rebar3)
+REBAR := rebar3
 
 .PHONY: all
-all: $(REBAR) compile
-	echo $(REBAR)
+all: compile
+
+.PHONY: $(REBAR)
+$(REBAR):
+	@if ! which rebar3; then echo "rebar3 not found in PATH"; exit 1; fi
 
 .PHONY: deps
 deps:
@@ -17,13 +20,13 @@ docsclean:
 	@rm -rf doc/*.png doc/*.html doc/*.css doc/edoc-info
 
 .PHONY: compile
-compile: deps
+compile: rebar3 deps
 	$(REBAR) compile
 
 ## Environment variable CUTTLEFISH_ESCRIPT is shared with rebar.config
 .PHONY: escript
 escript: export CUTTLEFISH_ESCRIPT = true
-escript: $(REBAR)
+escript:
 	$(REBAR) as escript escriptize
 
 .PHONY: clean
