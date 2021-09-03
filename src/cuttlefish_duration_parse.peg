@@ -8,12 +8,12 @@ duration_segment <- (float / integer) unit `
     Amount * Multiplier
 `;
 
-integer <- [1-9] [0-9]* `list_to_integer(?FLATTEN(Node))`;
+integer <- [0-9] [0-9]* `list_to_integer(?FLATTEN(Node))`;
 
 unit <- "f" / "w" / "d" / "h" / "ms" / "m" / "s"  `binary_to_atom(Node, latin1)`;
 
 float <- ( [0-9]+ "." [0-9]+ ) / ( "." [0-9]+ ) `
-   case Node of 
+   case Node of
        [<<".">>, Mantissa] ->
            list_to_float(?FLATTEN(["0.", Mantissa]));
        _ ->
