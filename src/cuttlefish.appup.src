@@ -6,4 +6,4 @@
   [ {"3.3.5", [{load_module, cuttlefish_duration_parse , brutal_purge, soft_purge, []}]}
   , {<<".*">>,[]}
   ]
-}    
+}.
