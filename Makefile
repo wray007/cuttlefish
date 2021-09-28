@@ -28,14 +28,14 @@ compile: deps
 escript: export CUTTLEFISH_ESCRIPT = true
 escript: $(REBAR)
 	$(REBAR) as escript escriptize
-	rm -rf _build
+	rm -rf _escript
 
 .PHONY: clean
 clean: distclean
 
 .PHONY: distclean
 distclean:
-	@rm -rf _build cuttlefish erl_crash.dump rebar3.crashdump rebar.lock
+	@rm -rf _build _escript cuttlefish erl_crash.dump rebar3.crashdump rebar.lock
 
 .PHONY: eunit
 eunit: compile
