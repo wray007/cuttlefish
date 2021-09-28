@@ -28,6 +28,7 @@ compile: deps
 escript: export CUTTLEFISH_ESCRIPT = true
 escript: $(REBAR)
 	$(REBAR) as escript escriptize
+	rm -rf _build
 
 .PHONY: clean
 clean: distclean
